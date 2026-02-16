@@ -14,7 +14,7 @@ def run():
         # 2. Tìm ô tìm kiếm và nhập nội dung
         # Trong Playwright, ta có thể tìm theo thuộc tính 'name' của ô input
         page.locator("id=APjFqb").fill("Playwright Python")
-
+        page.wait_for_timeout(3000)
         # 3. Nhấn phím Enter để tìm kiếm
         page.keyboard.press("Enter")
 
