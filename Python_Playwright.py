@@ -44,7 +44,13 @@ def run(playwright: Playwright) -> None:
     page.get_by_role("textbox", name="Password").click()
     page.get_by_role("textbox", name="Password").fill("SuperSecretPassword!")
     page.get_by_role("button", name=" Login").click()
-
+    # Thêm dòng này vào cuối kịch bản đăng nhập, sau khi nhấn Login
+    # Kiểm tra xem có chuyển hướng đến trang 'secure' hay không
+    expect(page).to_have_url(re.compile(".*secure"))
+    # Kiểm tra xem thông báo thành công có hiển thị không
+    success_message = page.locator("#flash")
+    expect(success_message).to_be_visible()
+    expect(success_message).to_contain_text("You logged into a secure area!")
     # ---------------------
     context.close()
     browser.close()
